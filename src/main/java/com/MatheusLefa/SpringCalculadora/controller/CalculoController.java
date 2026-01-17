@@ -14,7 +14,7 @@ public class CalculoController {
     }
 
     @GetMapping("/{operacao}")
-    public double calcular(@PathVariable String operacao, @RequestParam double a, @RequestParam double b){
+    public Object calcular(@PathVariable String operacao, @RequestParam double a, @RequestParam double b){
         return calculoService.calcular(operacao, a, b);
     }
 }

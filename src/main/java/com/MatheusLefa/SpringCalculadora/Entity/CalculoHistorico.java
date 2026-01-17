@@ -18,11 +18,11 @@ public class CalculoHistorico {
 
     private String operacao;
 
-    private Double numero1;
+    private double numero1;
 
-    private Double numero2;
+    private double numero2;
 
-    private Double resultado;
+    private double resultado;
 
     private LocalDateTime dataCalculo;
 

@@ -6,6 +6,8 @@ import com.MatheusLefa.SpringCalculadora.repository.CalculoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CalculoServiceImpl implements CalculoService {
@@ -18,7 +20,7 @@ public class CalculoServiceImpl implements CalculoService {
 
 
     @Override
-    public double calcular(String operacao, double a, double b) {
+    public Object calcular(String operacao, double a, double b) {
 
         CalculoHistorico calculo = new CalculoHistorico();
         calculo.setOperacao(operacao);
@@ -44,4 +46,17 @@ public class CalculoServiceImpl implements CalculoService {
 
         return resultado;
     }
+
+    @Override
+    public List<CalculoHistorico> listarCalculos() {
+        return calculoRepository.findAll();
+    }
+
+    @Override
+    public CalculoHistorico buscarPorId(Long id) {
+        return calculoRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Cálculo não encontrado"));
+    }
+
+
 }
