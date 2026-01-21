@@ -1,10 +1,11 @@
 package com.MatheusLefa.SpringCalculadora.service;
 
 import com.MatheusLefa.SpringCalculadora.Entity.Usuario;
-import com.MatheusLefa.SpringCalculadora.dto.UsuarioResponseDTO;
+import com.MatheusLefa.SpringCalculadora.dto.UsuarioRequestDTO;
 import com.MatheusLefa.SpringCalculadora.exception.EmailJaCadastradoException;
 import com.MatheusLefa.SpringCalculadora.exception.RecursoNaoEncontradoException;
 import com.MatheusLefa.SpringCalculadora.repository.UsuarioRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Usuario criar(UsuarioResponseDTO dto){
+    public Usuario criar(@Valid UsuarioRequestDTO dto){
         if(usuarioRepository.existsByEmail(dto.email())){
             throw new EmailJaCadastradoException("Email já cadastrado");
         }
@@ -40,7 +41,7 @@ public class UsuarioService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
     }
 
-    public Usuario atualizar(Long id,UsuarioResponseDTO dto){
+    public Usuario atualizar(Long id, @Valid UsuarioRequestDTO dto){
         Usuario usuario = buscarPorId(id);
 
         usuario.setNome(dto.nome());
