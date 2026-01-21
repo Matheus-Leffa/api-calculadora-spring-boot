@@ -34,7 +34,7 @@ public class CalculoServiceImpl implements CalculoService {
             case "multiplicar" -> a * b;
             case "dividir" -> {
                 if (b == 0) {
-                    throw new DivisaoPorZeroException();
+                    throw new DivisaoPorZeroException("Não é possível dividir por 0");
                 }
                 yield a/b;
             }
