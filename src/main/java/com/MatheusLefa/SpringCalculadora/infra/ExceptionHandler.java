@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(DivisaoPorZeroException.class)
-    public ResponseEntity<String> divisaoInvalida(DivisaoPorZeroException ex){
+    public ResponseEntity<String> handleDivisaoInvalida(DivisaoPorZeroException ex){
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
