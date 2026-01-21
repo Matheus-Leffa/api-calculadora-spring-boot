@@ -14,8 +14,6 @@ public class Usuario {
     @Column(nullable = false)
     private String nome;
 
-    private int idade;
-
     @Column(nullable = false, unique = true)
     private String email;
 
