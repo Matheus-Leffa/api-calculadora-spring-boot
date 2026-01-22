@@ -1,4 +1,4 @@
-package com.MatheusLefa.SpringCalculadora.infra;
+package com.MatheusLefa.SpringCalculadora.infra.ExceptionHandler;
 
 import com.MatheusLefa.SpringCalculadora.exception.DivisaoPorZeroException;
 import com.MatheusLefa.SpringCalculadora.exception.EmailJaCadastradoException;
