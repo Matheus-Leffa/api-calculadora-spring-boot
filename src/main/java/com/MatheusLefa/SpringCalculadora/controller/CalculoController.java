@@ -1,6 +1,6 @@
 package com.MatheusLefa.SpringCalculadora.controller;
 
-import com.MatheusLefa.SpringCalculadora.Entity.CalculoHistorico;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.CalculoHistorico;
 import com.MatheusLefa.SpringCalculadora.dto.CalculoRequestDTO;
 import com.MatheusLefa.SpringCalculadora.dto.CalculoResponseDTO;
 import com.MatheusLefa.SpringCalculadora.service.CalculoService;

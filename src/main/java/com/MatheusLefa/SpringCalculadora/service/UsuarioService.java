@@ -1,6 +1,6 @@
 package com.MatheusLefa.SpringCalculadora.service;
 
-import com.MatheusLefa.SpringCalculadora.Entity.Usuario;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.user.Usuario;
 import com.MatheusLefa.SpringCalculadora.dto.UsuarioRequestDTO;
 import com.MatheusLefa.SpringCalculadora.exception.EmailJaCadastradoException;
 import com.MatheusLefa.SpringCalculadora.exception.RecursoNaoEncontradoException;

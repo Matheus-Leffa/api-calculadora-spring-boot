@@ -1,4 +1,4 @@
-package com.MatheusLefa.SpringCalculadora.Entity;
+package com.MatheusLefa.SpringCalculadora.domain.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,13 +1,12 @@
 package com.MatheusLefa.SpringCalculadora.service;
 
-import com.MatheusLefa.SpringCalculadora.Entity.CalculoHistorico;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.CalculoHistorico;
 import com.MatheusLefa.SpringCalculadora.exception.DivisaoPorZeroException;
 import com.MatheusLefa.SpringCalculadora.repository.CalculoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CalculoServiceImpl implements CalculoService {
