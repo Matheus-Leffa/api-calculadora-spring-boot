@@ -2,6 +2,7 @@ package com.MatheusLefa.SpringCalculadora.domain.Entity.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Table(name = "usuarios")
 @Entity(name = "usuarios")
 public class Usuario implements UserDetails {
@@ -29,6 +31,14 @@ public class Usuario implements UserDetails {
     private String password;
 
     private UsuarioRole role;
+
+    public Usuario(String nome, String email, String login, String password, UsuarioRole role) {
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
