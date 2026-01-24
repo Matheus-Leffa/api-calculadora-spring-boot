@@ -2,7 +2,9 @@ package com.MatheusLefa.SpringCalculadora.controller;
 
 import com.MatheusLefa.SpringCalculadora.domain.Entity.user.Usuario;
 import com.MatheusLefa.SpringCalculadora.dto.AuthenticationDTO;
+import com.MatheusLefa.SpringCalculadora.dto.LoginResponseDTO;
 import com.MatheusLefa.SpringCalculadora.dto.RegisterDTO;
+import com.MatheusLefa.SpringCalculadora.infra.ExceptionHandler.security.TokenService;
 import com.MatheusLefa.SpringCalculadora.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,13 @@ public class AuthenticationController {
 
     private final PasswordEncoder passwordEncoder;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+    private final TokenService tokenService;
+
+    public AuthenticationController(AuthenticationManager authenticationManager, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder, TokenService tokenService) {
         this.authenticationManager = authenticationManager;
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("/login")
@@ -36,12 +41,14 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.gerarToken((Usuario) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
-        if(this.usuarioRepository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
+        if(this.usuarioRepository.findByLogin(data.login()).isPresent()) return ResponseEntity.badRequest().build();
 
         String senhaCriptografada = passwordEncoder.encode(data.password());
         Usuario novoUsuario = new Usuario(data.nome(), data.email(),data.login(), senhaCriptografada, data.role());
