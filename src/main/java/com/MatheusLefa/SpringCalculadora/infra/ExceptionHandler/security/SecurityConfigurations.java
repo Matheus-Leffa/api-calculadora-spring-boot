@@ -27,9 +27,13 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(authorize -> authorize
+
+                        .requestMatchers("/h2-console/**").permitAll()
+
                         .requestMatchers("/auth/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/calculadora").hasRole("ADMIN")
