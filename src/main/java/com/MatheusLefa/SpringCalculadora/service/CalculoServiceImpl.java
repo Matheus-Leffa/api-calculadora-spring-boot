@@ -5,6 +5,7 @@ import com.MatheusLefa.SpringCalculadora.domain.Entity.usuario.Usuario;
 import com.MatheusLefa.SpringCalculadora.dto.CalculoResponseDTO;
 import com.MatheusLefa.SpringCalculadora.exception.DivisaoPorZeroException;
 import com.MatheusLefa.SpringCalculadora.repository.CalculoRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +56,23 @@ public class CalculoServiceImpl implements CalculoService {
 
     @Override
     public List<CalculoResponseDTO> listarCalculos() {
-        return calculoRepository.findAll()
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Usuario usuarioLogado = (Usuario) authentication.getPrincipal();
+
+        boolean isAdmin = usuarioLogado.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        List<CalculoHistorico> calculos;
+
+        if(isAdmin){
+            calculos = calculoRepository.findAll();
+        }else {
+            calculos = calculoRepository.findByUsuario(usuarioLogado);
+        }
+
+        return calculos
                 .stream()
                 .map(calculo -> new CalculoResponseDTO(
                         calculo.getId(),
