@@ -1,8 +1,11 @@
 package com.MatheusLefa.SpringCalculadora.service;
 
-import com.MatheusLefa.SpringCalculadora.domain.Entity.CalculoHistorico;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.calculo.CalculoHistorico;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.usuario.Usuario;
+import com.MatheusLefa.SpringCalculadora.dto.CalculoResponseDTO;
 import com.MatheusLefa.SpringCalculadora.exception.DivisaoPorZeroException;
 import com.MatheusLefa.SpringCalculadora.repository.CalculoRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,11 +24,17 @@ public class CalculoServiceImpl implements CalculoService {
     @Override
     public CalculoHistorico calcular(String operacao, double a, double b) {
 
+        Usuario usuarioLogado = (Usuario) SecurityContextHolder
+                                .getContext()
+                                .getAuthentication()
+                                .getPrincipal();
+
         CalculoHistorico calculo = new CalculoHistorico();
         calculo.setOperacao(operacao);
         calculo.setNumero1(a);
         calculo.setNumero2(b);
         calculo.setDataCalculo(LocalDateTime.now());
+        calculo.setUsuario(usuarioLogado);
 
         double resultado =  switch (operacao.toLowerCase()) {
             case "soma" -> a + b;
@@ -45,8 +54,18 @@ public class CalculoServiceImpl implements CalculoService {
     }
 
     @Override
-    public List<CalculoHistorico> listarCalculos() {
-        return calculoRepository.findAll();
+    public List<CalculoResponseDTO> listarCalculos() {
+        return calculoRepository.findAll()
+                .stream()
+                .map(calculo -> new CalculoResponseDTO(
+                        calculo.getId(),
+                        calculo.getOperacao(),
+                        calculo.getNumero1(),
+                        calculo.getNumero2(),
+                        calculo.getResultado(),
+                        calculo.getDataCalculo()
+                ))
+                .toList();
     }
 
     @Override

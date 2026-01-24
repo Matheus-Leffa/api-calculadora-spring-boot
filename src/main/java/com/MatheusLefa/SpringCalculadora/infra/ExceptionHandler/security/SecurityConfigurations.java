@@ -28,11 +28,16 @@ public class SecurityConfigurations {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                        .requestMatchers("/auth/**").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/calculadora").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/calculadora").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/calculadora/**").hasAnyRole("ADMIN","USER")
+
+                        .anyRequest().denyAll()
+                )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

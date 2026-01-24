@@ -1,6 +1,6 @@
 package com.MatheusLefa.SpringCalculadora.controller;
 
-import com.MatheusLefa.SpringCalculadora.domain.Entity.CalculoHistorico;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.calculo.CalculoHistorico;
 import com.MatheusLefa.SpringCalculadora.dto.CalculoRequestDTO;
 import com.MatheusLefa.SpringCalculadora.dto.CalculoResponseDTO;
 import com.MatheusLefa.SpringCalculadora.service.CalculoService;
@@ -21,7 +21,7 @@ public class CalculoController {
     }
 
     @GetMapping
-    public List<CalculoHistorico> listarCalculos(){
+    public List<CalculoResponseDTO> listarCalculos(){
         return calculoService.listarCalculos();
     }
 

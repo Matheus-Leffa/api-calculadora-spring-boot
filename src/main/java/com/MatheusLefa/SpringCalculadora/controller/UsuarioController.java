@@ -1,6 +1,6 @@
 package com.MatheusLefa.SpringCalculadora.controller;
 
-import com.MatheusLefa.SpringCalculadora.domain.Entity.user.Usuario;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.usuario.Usuario;
 import com.MatheusLefa.SpringCalculadora.dto.UsuarioRequestDTO;
 import com.MatheusLefa.SpringCalculadora.dto.UsuarioResponseDTO;
 import com.MatheusLefa.SpringCalculadora.service.UsuarioService;

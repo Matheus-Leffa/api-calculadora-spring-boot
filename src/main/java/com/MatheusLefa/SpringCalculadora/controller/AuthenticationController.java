@@ -1,17 +1,15 @@
 package com.MatheusLefa.SpringCalculadora.controller;
 
-import com.MatheusLefa.SpringCalculadora.domain.Entity.user.Usuario;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.usuario.Usuario;
 import com.MatheusLefa.SpringCalculadora.dto.AuthenticationDTO;
 import com.MatheusLefa.SpringCalculadora.dto.LoginResponseDTO;
 import com.MatheusLefa.SpringCalculadora.dto.RegisterDTO;
 import com.MatheusLefa.SpringCalculadora.infra.ExceptionHandler.security.TokenService;
 import com.MatheusLefa.SpringCalculadora.repository.UsuarioRepository;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

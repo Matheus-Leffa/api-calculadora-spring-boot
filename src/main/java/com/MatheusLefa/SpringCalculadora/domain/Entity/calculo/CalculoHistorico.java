@@ -1,9 +1,7 @@
-package com.MatheusLefa.SpringCalculadora.domain.Entity;
+package com.MatheusLefa.SpringCalculadora.domain.Entity.calculo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.usuario.Usuario;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -25,5 +23,9 @@ public class CalculoHistorico {
     private double resultado;
 
     private LocalDateTime dataCalculo;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
 }

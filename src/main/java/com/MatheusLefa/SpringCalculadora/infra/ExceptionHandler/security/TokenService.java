@@ -1,6 +1,6 @@
 package com.MatheusLefa.SpringCalculadora.infra.ExceptionHandler.security;
 
-import com.MatheusLefa.SpringCalculadora.domain.Entity.user.Usuario;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.usuario.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;

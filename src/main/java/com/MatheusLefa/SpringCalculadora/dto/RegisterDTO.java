@@ -1,6 +1,6 @@
 package com.MatheusLefa.SpringCalculadora.dto;
 
-import com.MatheusLefa.SpringCalculadora.domain.Entity.user.UsuarioRole;
+import com.MatheusLefa.SpringCalculadora.domain.Entity.usuario.UsuarioRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
